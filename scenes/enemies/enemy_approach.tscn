@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1sv6d6wy478j"]
+
+[ext_resource type="Script" uid="uid://bnlcbv00snptf" path="res://scripts/enemy_ai.gd" id="1_8np12"]
+[ext_resource type="Texture2D" uid="uid://dbh2qna6snpgn" path="res://assets/sprites/enemy.png" id="2_w037j"]
+[ext_resource type="Script" uid="uid://4ree138oqyf0" path="res://scripts/states/state_machine.gd" id="4_dvjjp"]
+[ext_resource type="Script" uid="uid://modng5eypkbf" path="res://scripts/states/state_approach.gd" id="5_2vht8"]
+[ext_resource type="Script" uid="uid://gmfwkxey37ur" path="res://scripts/states/state_idle.gd" id="6_brgdq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj1k4"]
+size = Vector2(5.65685, 5.65685)
+
+[node name="Enemy_Approach" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+floor_stop_on_slope = false
+floor_constant_speed = true
+script = ExtResource("1_8np12")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w037j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+position = Vector2(0, 1.68587e-07)
+rotation = -2.35619
+shape = SubResource("RectangleShape2D_pj1k4")
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_dvjjp")
+initial_state = NodePath("Approach")
+
+[node name="Approach" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_2vht8")
+enemy = NodePath("../..")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_brgdq")
+enemy = NodePath("../..")
