@@ -17,16 +17,3 @@ planet_scene = ExtResource("3_o6xl0")
 [node name="TetherLine" parent="." instance=ExtResource("2_tbgi4")]
 
 [node name="Player" parent="." instance=ExtResource("3_tefeu")]
-position = Vector2(704, 0)
-
-[node name="Planet" parent="." instance=ExtResource("3_o6xl0")]
-position = Vector2(583, -96)
-
-[node name="Planet2" parent="." instance=ExtResource("3_o6xl0")]
-position = Vector2(836, -64)
-
-[node name="Planet3" parent="." instance=ExtResource("3_o6xl0")]
-position = Vector2(803, 127)
-
-[node name="Planet4" parent="." instance=ExtResource("3_o6xl0")]
-position = Vector2(575, 81)

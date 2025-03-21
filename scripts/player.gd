@@ -74,7 +74,7 @@ func apply_gravity(delta):
 		var distance_vector = planet.global_position - global_position
 		var distance = distance_vector.length() - planet.radius
 
-		if distance > 0:  # Prevent division by zero
+		if distance > 0 and distance < 300:  # Prevent division by zero
 			# Apply a smoothstep-like curve: stronger at mid-range, weaker near planet
 			var gravity_force = gravity_strength * (1.0 - exp(-distance * 0.005)) / (distance * distance + 1)
 			total_gravity += distance_vector.normalized() * gravity_force  # Sum gravity forces

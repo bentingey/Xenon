@@ -1,49 +1,51 @@
 extends Node2D
 
 @export var planet_scene: PackedScene
+@export var min_spacing: int = 340            # Minimum center-to-center spacing (in pixels)
+@export var allowed_types: Array = []         # If empty, all planet types are allowed
+@export var spawn_area: Rect2 = Rect2(-1000, -1000, 2000, 2000)  # Area (in pixels) in which to spawn planets
 
-@onready var player = get_tree().get_first_node_in_group("player")
+var planet_nodes: Array = []   # Holds references to all currently spawned planets   
 
-var last_planet_y: int
-var num_planets_min: int = 10
-var num_planets_max: int = 15
+# This function spawns 'count' new planets without overlapping existing ones.
+func add_planets(count: int, allowed_types: Array):
+	var attempts: int = 0
+	var max_attempts: int = count * 50  # safeguard to avoid infinite loops
 
-const FIRST_Y_MIN: int = 360
-const FIRST_Y_MAX: int = 560
-const MIN_Y_SPACING: int = 100
-const MAX_Y_SPACING: int = 560
-const X_OFFSET_LIMIT: int = 140
-const CENTER_X = 704  # Centerline for planets
+	while count > 0 and attempts < max_attempts:
+		# Generate a random candidate position within spawn_area.
+		var candidate = Vector2(
+			randf_range(spawn_area.position.x, spawn_area.position.x + spawn_area.size.x),
+			randf_range(spawn_area.position.y, spawn_area.position.y + spawn_area.size.y)
+		)
+		
+		# Check that candidate is far enough from all existing planets.
+		var valid = true
+		for planet in planet_nodes:
+			if candidate.distance_to(planet.global_position) < min_spacing:
+				valid = false
+				break
+		if valid:
+			# Instantiate the planet, set its position, and add it to the scene.
+			var planet = planet_scene.instantiate()
+			planet.global_position = candidate.round()  # Round to avoid subpixel issues
+			add_child(planet)
+			
+			# Defer randomization so the planet's children (like its Sprite2D) are ready.
+			planet.call_deferred("randomize_planet", allowed_types)
+			
+			# Add to our persistent list.
+			planet_nodes.append(planet)
+			
+			# Connect to the planet's tree_exited signal so we remove it from planet_nodes when it's removed.
+			planet.connect("tree_exited", Callable(self, "_on_planet_exited").bind(planet))
 
+			count -= 1
+		attempts += 1
+	
+	print("Total planets spawned:", planet_nodes.size())
 
-func _ready():
-	if not player:
-		print("Error: No player found!")
-		return
-	generate_system()  # Generate by default
-
-func generate_system(min_planets: int = num_planets_min, max_planets: int = num_planets_max, allowed_types: Array = []):
-	# Remove old planets before generating new ones
-	for child in get_children():
-		if child is StaticBody2D:  # Remove old planets
-			child.queue_free()
-
-	var num_planets = randi_range(min_planets, max_planets)  # Randomize number of planets
-
-	# First planet
-	last_planet_y = player.global_position.y - randi_range(FIRST_Y_MIN, FIRST_Y_MAX)
-	spawn_planet(Vector2(CENTER_X + randi_range(-X_OFFSET_LIMIT, X_OFFSET_LIMIT), last_planet_y), allowed_types)
-
-	# Subsequent planets
-	for _i in range(num_planets - 1):
-		last_planet_y -= int((randi_range(MIN_Y_SPACING, MAX_Y_SPACING) + randi_range(MIN_Y_SPACING, MAX_Y_SPACING)) / 2)  # Bias Y spacing toward the middle
-		spawn_planet(Vector2(CENTER_X + randi_range(-X_OFFSET_LIMIT, X_OFFSET_LIMIT), last_planet_y), allowed_types)
-
-func spawn_planet(position: Vector2, allowed_types: Array):
-	var planet = planet_scene.instantiate()
-
-	planet.global_position = position.round()  # Use int positions to avoid blurring
-	add_child(planet)
-
-	# Call randomize_planet() after the planet is fully added
-	planet.call_deferred("randomize_planet", allowed_types)
+# Called when a planet leaves the scene tree.
+func _on_planet_exited(planet):
+	if planet in planet_nodes:
+		planet_nodes.erase(planet)

@@ -1,4 +1,5 @@
-res://scenes/system.tscn
 res://scenes/main.tscn
+res://scripts/main.gd
+res://scenes/system.tscn
 res://scenes/player.tscn
-res://scenes/planet.tscn
+res://scripts/system.gd
