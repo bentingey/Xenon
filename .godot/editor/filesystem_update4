@@ -2,4 +2,5 @@ res://scenes/main.tscn
 res://scenes/system.tscn
 res://scenes/player.tscn
 res://scenes/enemy_spawner.tscn
+res://scripts/states/state_follow.gd
 res://scripts/enemy_spawner.gd

@@ -11,6 +11,7 @@ func Enter():
 func Physics_Update(_delta: float):
 	# get the direction between the player and the enemy
 	var direction = player.global_position - enemy.global_position
+	direction = direction.normalized()
 	
 	# if player is more than 25 distance away, more towards them
 	if direction.length() > 25:
