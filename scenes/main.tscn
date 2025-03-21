@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://b667te82q1mpn"]
+
+[ext_resource type="PackedScene" uid="uid://cylx4e2swiiac" path="res://scenes/planet_highlight.tscn" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://b10m8bjfc1c5n" path="res://scripts/main.gd" id="1_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://df4uo3qfq45g5" path="res://scenes/tether_line.tscn" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bunbouvu5mb06" path="res://scenes/system.tscn" id="2_tefeu"]
+[ext_resource type="PackedScene" uid="uid://wbr5n02f2aut" path="res://scenes/planet.tscn" id="3_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cg7gie2sfey7l" path="res://scenes/player.tscn" id="3_tefeu"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tbgi4")
+system_scene = ExtResource("2_tefeu")
+planet_scene = ExtResource("3_o6xl0")
+
+[node name="PlanetHighlight" parent="." instance=ExtResource("1_jyhfs")]
+
+[node name="TetherLine" parent="." instance=ExtResource("2_tbgi4")]
+
+[node name="Player" parent="." instance=ExtResource("3_tefeu")]
+position = Vector2(704, 0)

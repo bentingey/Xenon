@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cylx4e2swiiac"]
+
+[ext_resource type="Script" uid="uid://bkx8insgw5e4k" path="res://scripts/planet_highlight.gd" id="1_qbj2q"]
+
+[node name="PlanetHighlight" type="Node2D"]
+script = ExtResource("1_qbj2q")

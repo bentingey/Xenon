@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg7gie2sfey7l"]
+
+[ext_resource type="Script" uid="uid://w26m1tmbl6p1" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://s8fxaq4gylt0" path="res://scripts/camera.gd" id="2_qhqgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sgp6g"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0wfyh"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sgp6g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.1496, 0.66088, 0.88, 1)
+z_index = 1
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(16, 16)
+texture = SubResource("PlaceholderTexture2D_0wfyh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -104)
+process_callback = 0
+limit_left = 380
+limit_right = 1028
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_vertical_enabled = true
+drag_bottom_margin = 0.4
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("2_qhqgy")

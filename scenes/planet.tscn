@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://wbr5n02f2aut"]
+
+[ext_resource type="Script" uid="uid://dv05m4xi8hva" path="res://scripts/planet.gd" id="1_h8ms6"]
+[ext_resource type="Texture2D" uid="uid://cy1igj8bsb4y3" path="res://assets/sprites/planet_placeholder.png" id="2_ggt7d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tefeu"]
+radius = 8.24621
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wfyh"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
+bg_color = Color(1.19364e-05, 0.992259, 0.389267, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[node name="Planet" type="StaticBody2D" groups=["planets"]]
+script = ExtResource("1_h8ms6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tefeu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("2_ggt7d")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 12.0
+offset_top = -13.0
+offset_right = 16.0
+offset_bottom = 14.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0wfyh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sugp2")
+fill_mode = 3
+show_percentage = false
