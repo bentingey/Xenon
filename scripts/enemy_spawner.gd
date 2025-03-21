@@ -4,7 +4,7 @@ extends Node2D
 @export var spawn_margin: float = 100.0
 @export var spawn_interval: float = 2.0
 
-var player: Node2D
+@export var player: Node2D
 
 func _ready():
 	$Timer.wait_time = spawn_interval

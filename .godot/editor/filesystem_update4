@@ -1,5 +1,5 @@
 res://scenes/main.tscn
-res://scripts/main.gd
 res://scenes/system.tscn
 res://scenes/player.tscn
-res://scripts/system.gd
+res://scenes/enemy_spawner.tscn
+res://scripts/enemy_spawner.gd

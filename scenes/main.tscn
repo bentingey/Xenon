@@ -13,7 +13,8 @@ script = ExtResource("1_tbgi4")
 system_scene = ExtResource("2_tefeu")
 planet_scene = ExtResource("3_o6xl0")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("7_o6xl0")]
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_o6xl0")]
+player = NodePath("../Player")
 
 [node name="PlanetHighlight" parent="." instance=ExtResource("1_jyhfs")]
 
