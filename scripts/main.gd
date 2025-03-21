@@ -8,3 +8,5 @@ func _ready() -> void:
 	var system = system_scene.instantiate()
 	add_child(system)
 	system.generate_system(5, 1000, ["terrestrial", "gas giant", "ice", "lava", "ocean"])
+	
+	$EnemySpawner.player = $Player

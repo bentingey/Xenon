@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d1sv6d6wy478j"]
 
-[ext_resource type="Script" path="res://scripts/enemy_ai.gd" id="1_8np12"]
+[ext_resource type="Script" uid="uid://bnlcbv00snptf" path="res://scripts/enemy_ai.gd" id="1_8np12"]
 [ext_resource type="Texture2D" uid="uid://dbh2qna6snpgn" path="res://assets/sprites/enemy.png" id="2_w037j"]
 [ext_resource type="Script" uid="uid://4ree138oqyf0" path="res://scripts/states/state_machine.gd" id="4_dvjjp"]
 [ext_resource type="Script" uid="uid://modng5eypkbf" path="res://scripts/states/state_approach.gd" id="5_2vht8"]
@@ -10,6 +10,7 @@
 size = Vector2(5.65685, 5.65685)
 
 [node name="Enemy_Approach" type="CharacterBody2D"]
+scale = Vector2(5, 5)
 floor_stop_on_slope = false
 floor_constant_speed = true
 script = ExtResource("1_8np12")
