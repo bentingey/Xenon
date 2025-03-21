@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsmvnpw84uodw"]
+
+[ext_resource type="Texture2D" uid="uid://b6ghey2qhwtb1" path="res://assets/sprites/enemy.png" id="1_42rcr"]
+[ext_resource type="Script" uid="uid://cg7717ca8m3ut" path="res://scripts/enemy_ai.gd" id="1_d3r1v"]
+[ext_resource type="PackedScene" uid="uid://bm3sinoolnqik" path="res://scenes/killzone.tscn" id="2_1txru"]
+[ext_resource type="Script" uid="uid://71jhf2cmy33n" path="res://scripts/states/state_machine.gd" id="3_8ky6e"]
+[ext_resource type="Script" uid="uid://b3bsqx632uaqk" path="res://scripts/states/state_follow.gd" id="5_eu5sk"]
+[ext_resource type="Script" uid="uid://d1do0m8e1f7ci" path="res://scripts/states/state_wander.gd" id="5_xt37l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgvje"]
+size = Vector2(5.65685, 5.65685)
+
+[node name="Enemy_wander_follow" type="CharacterBody2D"]
+script = ExtResource("1_d3r1v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_42rcr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+position = Vector2(0, 1.68587e-07)
+rotation = -2.35619
+shape = SubResource("RectangleShape2D_kgvje")
+
+[node name="Killzone" parent="." instance=ExtResource("2_1txru")]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+z_index = 2
+position = Vector2(0, 1.68587e-07)
+rotation = -2.35619
+shape = SubResource("RectangleShape2D_kgvje")
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_8ky6e")
+initial_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_xt37l")
+enemy = NodePath("../..")
+
+[node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_eu5sk")
+enemy = NodePath("../..")

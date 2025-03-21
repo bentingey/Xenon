@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b667te82q1mpn"]
+[gd_scene load_steps=9 format=3 uid="uid://b667te82q1mpn"]
 
 [ext_resource type="PackedScene" uid="uid://cylx4e2swiiac" path="res://scenes/planet_highlight.tscn" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://b10m8bjfc1c5n" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bunbouvu5mb06" path="res://scenes/system.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://wbr5n02f2aut" path="res://scenes/planet.tscn" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cg7gie2sfey7l" path="res://scenes/player.tscn" id="3_tefeu"]
+[ext_resource type="PackedScene" uid="uid://c2x1fr04mn6eo" path="res://scenes/enemies/enemy.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://d1sv6d6wy478j" path="res://scenes/enemies/enemy_approach.tscn" id="8_tipki"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tbgi4")
@@ -30,3 +32,10 @@ position = Vector2(803, 127)
 
 [node name="Planet4" parent="." instance=ExtResource("3_o6xl0")]
 position = Vector2(575, 81)
+
+[node name="Enemy" parent="." instance=ExtResource("7_o6xl0")]
+position = Vector2(686, 117)
+
+[node name="Enemy_Approach" parent="." instance=ExtResource("8_tipki")]
+position = Vector2(658, -86)
+scale = Vector2(3, 3)

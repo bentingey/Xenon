@@ -1,4 +1,9 @@
-res://scenes/system.tscn
 res://scenes/main.tscn
+res://scenes/system.tscn
 res://scenes/player.tscn
 res://scenes/planet.tscn
+res://scripts/killzone.gd
+res://scenes/enemies/enemy.tscn
+res://scenes/enemies/enemy_approach.tscn
+res://scripts/states/state_idle.gd
+res://scripts/states/state_approach.gd
