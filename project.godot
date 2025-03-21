@@ -17,10 +17,7 @@ config/icon="uid://crq31ll70jd6p"
 
 [display]
 
-window/size/viewport_width=648
-window/size/viewport_height=1152
 window/stretch/mode="viewport"
-window/handheld/orientation=1
 
 [global_group]
 
